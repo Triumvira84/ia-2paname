@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - main
+      - mainhttps://github.com/Triumvira84/ia-2paname/actions
 
 jobs:
   deploy:
@@ -18,6 +18,6 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           BRANCH: gh-pages
           FOLDER: .

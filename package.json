@@ -1,11 +1,7 @@
 {
-  "name": "ia-2paname",
+  "name": "my-github-pages-site",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "build": "echo 'Build step not defined'"
-  },
-  "dependencies": {},
-  "devDependencies": {}
+    "build": "echo 'Building the project...' && mkdir -p public && cp index.html public/index.html"
+  }
 }

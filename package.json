@@ -1,0 +1,11 @@
+{
+  "name": "ia-2paname",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Build step not defined'"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

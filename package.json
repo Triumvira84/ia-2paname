@@ -1,7 +1,0 @@
-{
-  "name": "my-github-pages-site",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "echo 'Building the project...' && mkdir -p public && cp index.html public/index.html"
-  }
-}

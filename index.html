@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Bienvenue sur GitHub Pages</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with AI</title>
 </head>
 <body>
-  <h1>Bonjour, Monde!</h1>
-  <p>Ceci est une page d'accueil pour votre site GitHub Pages.</p>
+    <h1>Chat with AI</h1>
+    <form id="chat-form">
+        <input type="text" id="prompt" placeholder="Ask something...">
+        <button type="submit">Send</button>
+    </form>
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const prompt = document.getElementById('prompt').value;
+            const responseElement = document.getElementById('response');
+
+            const response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ prompt, previous_interactions: [] })
+            });
+
+            const data = await response.json();
+            responseElement.innerText = data.response;
+        });
+    </script>
 </body>
 </html>

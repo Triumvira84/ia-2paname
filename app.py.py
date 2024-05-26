@@ -9,18 +9,11 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 def chat():
     data = request.json
     prompt = data['prompt']
-    previous_interactions = data.get('previous_interactions', [])
-    conversation = "\n".join(previous_interactions + [prompt])
-    
-    # Utilisation de la méthode de l'API OpenAI
-    response = openai.Completion.create(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
-        prompt=conversation,
-        max_tokens=150,
-        temperature=0.7,
+        messages=[{"role": "user", "content": prompt}]
     )
-
-    return jsonify({'response': response.choices[0].text.strip()})
+    return jsonify({'response': response['choices'][0]['message']['content'].strip()})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

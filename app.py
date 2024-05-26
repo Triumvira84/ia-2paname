@@ -1,13 +1,12 @@
+import os
 from flask import Flask, request, jsonify, send_from_directory
 import openai
-import os
 
 app = Flask(__name__, static_folder='static')
-
 openai.api_key = 'YOUR_API_KEY'
 
 @app.route('/')
-def index():
+def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/chat', methods=['POST'])
@@ -15,9 +14,10 @@ def chat():
     data = request.json
     prompt = data['prompt']
     response = openai.Completion.create(
-        engine="davinci",
+        engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=50
+        max_tokens=150,
+        temperature=0.7
     )
     return jsonify({'response': response.choices[0].text.strip()})
 

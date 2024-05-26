@@ -2,27 +2,23 @@ from flask import Flask, request, jsonify, send_from_directory
 import openai
 import os
 
-app = Flask(__name__)
-openai.api_key = 'YOUR_OPENAI_API_KEY'
+app = Flask(__name__, static_folder='static')
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 @app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
     prompt = data['prompt']
-    previous_interactions = data.get('previous_interactions', [])
-    conversation = "\n".join(previous_interactions + [prompt])
     response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=conversation,
-        max_tokens=150,
-        temperature=0.7,
-        stop=["\n"]
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=150
     )
     return jsonify({'response': response.choices[0].text.strip()})
 
 @app.route('/')
-def serve_index():
-    return send_from_directory('static', 'index.html')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

@@ -3,33 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with AI</title>
+    <title>Chatbot</title>
 </head>
 <body>
     <h1>Discutez avec l'IA</h1>
     <form id="chat-form">
-        <input type="text" id="prompt" placeholder="Ask something...">
+        <input type="text" id="prompt" placeholder="Posez votre question...">
         <button type="submit">Envoyer</button>
     </form>
     <div id="response"></div>
 
     <script>
-        document.getElementById('chat-form').addEventListener('submit', async (e) => {
+        document.getElementById('chat-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const prompt = document.getElementById('prompt').value;
-            const response = await fetch('/chat', {
+            const responseDiv = document.getElementById('response');
+
+            const response = await fetch('http://127.0.0.1:5000/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ prompt })
+                body: JSON.stringify({ prompt: prompt })
             });
-            const data = await response.json();
-            document.getElementById('response').innerText = data.response;
+
+            if (response.ok) {
+                const data = await response.json();
+                responseDiv.innerText = data.response;
+            } else {
+                responseDiv.innerText = "Erreur lors de la communication avec le serveur.";
+            }
         });
     </script>
 </body>
 </html>
+
 
 
 

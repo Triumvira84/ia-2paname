@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, send_from_directory
 import openai
 from dotenv import load_dotenv
 
-load_dotenv()  # Charger les variables d'environnement à partir du fichier .env
+load_dotenv()
 
 app = Flask(__name__, static_folder='static')
 openai.api_key = os.getenv('OPENAI_API_KEY')
@@ -27,5 +27,6 @@ def chat():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
 
 

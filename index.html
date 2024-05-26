@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat with AI</title>
+    <title>Discutez avec l'IA</title>
 </head>
 <body>
-    <h1>Chat with AI</h1>
+    <h1>Discutez avec l'IA</h1>
     <form id="chat-form">
         <input type="text" id="prompt" placeholder="Ask something...">
-        <button type="submit">Send</button>
+        <button type="submit">Envoyer</button>
     </form>
     <div id="response"></div>
 
@@ -17,20 +17,19 @@
         document.getElementById('chat-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const prompt = document.getElementById('prompt').value;
-            const responseElement = document.getElementById('response');
-
             const response = await fetch('https://bot2paname-04432c0e6542.herokuapp.com/chat', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ prompt, previous_interactions: [] })
+                body: JSON.stringify({ prompt })
             });
-
             const data = await response.json();
-            responseElement.innerText = data.response;
+            document.getElementById('response').innerText = data.response;
         });
     </script>
 </body>
-</html> 
+</html>
+
+
 

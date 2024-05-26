@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
-import openai
-import os
 
 app = Flask(__name__)
-openai.api_key = os.getenv('OPENAI_API_KEY')
+
+@app.route('/')
+def home():
+    return "Welcome to the Chatbot!"
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -16,5 +17,4 @@ def chat():
     return jsonify({'response': response['choices'][0]['message']['content'].strip()})
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=False, host='0.0.0.0', port=port)
+    app.run()

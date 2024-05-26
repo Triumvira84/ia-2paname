@@ -4,7 +4,7 @@ import openai
 
 app = Flask(__name__, static_folder='static')
 
-# Configurer la clé API OpenAI
+# Remplacez par votre clé API OpenAI
 openai.api_key = 'YOUR_OPENAI_API_KEY'
 
 @app.route('/')
@@ -24,5 +24,6 @@ def chat():
     return jsonify({'response': response.choices[0].text.strip()})
 
 if __name__ == '__main__':
+    # Utilisation de os.environ.get pour récupérer le port fourni par Heroku
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port, debug=True)
